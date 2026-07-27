@@ -1,10 +1,12 @@
-// ========= Mapping Configuration ========= //
+/***********************************************
+> Locket Gold Script by DangTrungHieu
+***********************************************/
+
 const mapping = {
   '%E8%BD%A6%E7%A5%A8%E7%A5%A8': ['vip', 'watch_vip'],
   'Locket': ['Gold', 'locket_1600_1y']
 };
 
-// ========= Base Objects ========= //
 var ua = $request.headers["User-Agent"] || $request.headers["user-agent"] || "",
     obj = {};
 
@@ -14,10 +16,8 @@ try {
   obj = {};
 }
 
-// Thêm thông báo
 obj.Attention = "Chúc mừng bạn! Vui lòng không bán hoặc chia sẻ cho người khác!";
 
-// Khởi tạo an toàn các object con để tránh crash
 if (!obj.subscriber) obj.subscriber = {};
 if (!obj.subscriber.subscriptions) obj.subscriber.subscriptions = {};
 if (!obj.subscriber.entitlements) obj.subscriber.entitlements = {};
@@ -51,7 +51,6 @@ var locketGold = {
   expires_date: "9999-01-09T10:10:14Z"
 };
 
-// ========= Match & Inject Process ========= //
 const match = Object.keys(mapping).find(e => ua.includes(e));
 
 if (match) {
@@ -60,7 +59,6 @@ if (match) {
   obj.subscriber.subscriptions[productId] = DangTrungHieu;
   obj.subscriber.entitlements[entitlementKey] = locketGold;
 } else {
-  // Mặc định fallback cho Locket nếu User-Agent không khớp
   obj.subscriber.subscriptions["locket_1600_1y"] = DangTrungHieu;
   obj.subscriber.entitlements["Gold"] = locketGold;
 }
